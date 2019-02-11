@@ -167,8 +167,17 @@ class _ForgotPassword extends State<ForgotPassword> {
                                 if(res==1) {
                                   username = _username.text;
                                   _username.text='';
-                                  showInSnackBar(
-                                      "Request submitted successfully");
+                                 /* showInSnackBar(
+                                      "Request submitted successfully");*/
+                                  showDialog(context: context, child:
+                                  new AlertDialog(
+                                    content: new Text("Please check your mail for the Password reset link."),
+                                  )
+                                  );
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => LoginPage()),
+                                  );
                                   setState(() {
                                     login=true;
                                     succ=true;
@@ -203,7 +212,7 @@ class _ForgotPassword extends State<ForgotPassword> {
                     ],
                   ):Center(),
                   err==true?Text('Invalid Email/Phone.',style: TextStyle(color: Colors.red,fontSize: 16.0),):Center(),
-                  succ==true?Text('Please check your mail for the Password reset link. After you have reset the password, please click below link to login.',style: TextStyle(fontSize: 16.0),):Center(),
+                /*  succ==true?Text('Please check your mail for the Password reset link. After you have reset the password, please click below link to login.',style: TextStyle(fontSize: 16.0),):Center(),
                   login==true?InkWell(
                     child: Text('\nClick here to Login',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16.0,color: Colors.teal),),
                     onTap:() async{
@@ -214,7 +223,7 @@ class _ForgotPassword extends State<ForgotPassword> {
                         MaterialPageRoute(builder: (context) => LoginPage()),
                       );
                     } ,
-                  ):Center(),
+                  ):Center(),*/
                 ],
               ),
           )

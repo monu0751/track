@@ -21,12 +21,12 @@ class RequestTimeOffService{
   var dio = new Dio();
   requestTimeOff(TimeOff timeoff) async{
     try {
-      //print(timeoff.OrgId);
-      //print(timeoff.EmpId + "----");
-      //print(timeoff.TimeofDate + "----");
-      //print(timeoff.TimeFrom + "----");
-      //print(timeoff.TimeTo + "----");
-      //print(timeoff.Reason + "----");
+      print(timeoff.OrgId);
+      print(timeoff.EmpId + "----");
+      print(timeoff.TimeofDate + "----");
+      print(timeoff.TimeFrom + "----");
+      print(timeoff.TimeTo + "----");
+      print(timeoff.Reason + "----");
       FormData formData = new FormData.from({
         "orgid": timeoff.OrgId,
         "uid": timeoff.EmpId,
@@ -37,7 +37,7 @@ class RequestTimeOffService{
       });
 
       Response response1 = await dio.post(globals.path+"reqForTimeOff", data: formData);
-      //print(response1.toString());
+      print("----->timeoff response "+response1.toString());
       if (response1.statusCode == 200) {
         Map timeoffMap = json.decode(response1.data);
         //print(timeoffMap["status"]);
