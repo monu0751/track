@@ -37,7 +37,11 @@ class _ForgotPassword extends State<ForgotPassword> {
   }
   // Platform messages are asynchronous, so we initialize in an async method.
   initPlatformState() async {
-
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      String loginuser = prefs.getString('username') ?? "";
+      _username.text=loginuser;
+    });
   }
 
 
