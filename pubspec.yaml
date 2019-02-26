@@ -30,7 +30,7 @@ dependencies:
   dio: ^1.0.6
   json_annotation: ^0.2.3
   shared_preferences: ^0.4.2
-  image_picker: ^0.4.10
+  image_picker: ^0.4.12+1
   image: ^2.0.4
   flutter_launcher_icons: "^0.6.1"
   datetime_picker_formfield: ^0.1.3
@@ -43,7 +43,6 @@ dependencies:
   native_device_orientation: ^0.0.3
   connectivity: ^0.3.2
   exifdart: ^0.7.0+2
-  flutter_image_compress: ^0.2.2
   flutter_native_image:
     git: https://github.com/btastic/flutter_native_image.git
 

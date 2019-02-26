@@ -462,7 +462,21 @@ class _Bulkatt extends State<Bulkatt> {
                                       child: Text('Time In'), // icon is 48px widget.
                                     ),*/
                                   ),
-                                  onChanged: (t) => setState(() => emplist[index].timein = t.hour.toString()+':'+t.minute.toString()),
+                                  onChanged: (t){
+                                    setState(() {
+                                      emplist[index].timein = t.hour.toString()+':'+t.minute.toString();
+                                      if (alreadySaved == 1) {
+                                        _saved.remove(emplist[index]);
+                                        emplist[index].csts = 0;
+                                        //print(emplist[index].timein);
+                                      } else {
+                                        _saved.add(emplist[index]);
+                                        emplist[index].csts = 1;
+                                        // print(emplist[index].timein);
+                                      }
+                                    }
+                                    );
+                                    },
                                   validator: (time) {
                                     if (time == null) {
                                       return 'Please enter TimeIn';
@@ -483,7 +497,20 @@ class _Bulkatt extends State<Bulkatt> {
                                       child: Text('Time Out'), // icon is 48px widget.
                                     ),*/
                                   ),
-                                  onChanged: (t) => setState(() => emplist[index].timeout = t.hour.toString()+':'+t.minute.toString()),
+                                  onChanged: (t) {
+                                    setState(() {
+                                      emplist[index].timeout = t.hour.toString()+':'+t.minute.toString();
+                                      if (alreadySaved == 1) {
+                                        _saved.remove(emplist[index]);
+                                        emplist[index].csts = 0;
+                                        //print(emplist[index].timein);
+                                      } else {
+                                        _saved.add(emplist[index]);
+                                        emplist[index].csts = 1;
+                                        // print(emplist[index].timein);
+                                      }
+                                    });
+                                    },
                                   validator: (time) {
                                     if (time == null) {
                                       return 'Please enter TimeOut';

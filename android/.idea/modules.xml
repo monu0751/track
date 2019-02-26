@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/android.iml" filepath="$PROJECT_DIR$/android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$USER_HOME$/development/flutter/.pub-cache/hosted/pub.dartlang.org/barcode_scan-0.0.8/android/barcode_scan.iml" filepath="$USER_HOME$/development/flutter/.pub-cache/hosted/pub.dartlang.org/barcode_scan-0.0.8/android/barcode_scan.iml" />
+      <module fileurl="file://$USER_HOME$/development/flutter/.pub-cache/hosted/pub.dartlang.org/camera-0.2.3/android/camera.iml" filepath="$USER_HOME$/development/flutter/.pub-cache/hosted/pub.dartlang.org/camera-0.2.3/android/camera.iml" />
+      <module fileurl="file://$USER_HOME$/development/flutter/.pub-cache/hosted/pub.dartlang.org/connectivity-0.3.2/android/connectivity.iml" filepath="$USER_HOME$/development/flutter/.pub-cache/hosted/pub.dartlang.org/connectivity-0.3.2/android/connectivity.iml" />
+      <module fileurl="file://$USER_HOME$/development/flutter/.pub-cache/git/flutter_native_image-20947f12e6ecf58236f4b0ccaf9965f527ced46d/android/flutter_native_image.iml" filepath="$USER_HOME$/development/flutter/.pub-cache/git/flutter_native_image-20947f12e6ecf58236f4b0ccaf9965f527ced46d/android/flutter_native_image.iml" />
+      <module fileurl="file://$USER_HOME$/development/flutter/.pub-cache/hosted/pub.dartlang.org/geocoder-0.1.2/android/geocoder.iml" filepath="$USER_HOME$/development/flutter/.pub-cache/hosted/pub.dartlang.org/geocoder-0.1.2/android/geocoder.iml" />
+      <module fileurl="file://$USER_HOME$/development/flutter/.pub-cache/hosted/pub.dartlang.org/image_picker-0.4.12+1/android/image_picker.iml" filepath="$USER_HOME$/development/flutter/.pub-cache/hosted/pub.dartlang.org/image_picker-0.4.12+1/android/image_picker.iml" />
+      <module fileurl="file://$USER_HOME$/development/flutter/.pub-cache/hosted/pub.dartlang.org/launch_review-1.0.1/android/launch_review.iml" filepath="$USER_HOME$/development/flutter/.pub-cache/hosted/pub.dartlang.org/launch_review-1.0.1/android/launch_review.iml" />
+      <module fileurl="file://$USER_HOME$/development/flutter/.pub-cache/hosted/pub.dartlang.org/location-1.4.1/android/location.iml" filepath="$USER_HOME$/development/flutter/.pub-cache/hosted/pub.dartlang.org/location-1.4.1/android/location.iml" />
+      <module fileurl="file://$USER_HOME$/development/flutter/.pub-cache/hosted/pub.dartlang.org/native_device_orientation-0.0.3/android/native_device_orientation.iml" filepath="$USER_HOME$/development/flutter/.pub-cache/hosted/pub.dartlang.org/native_device_orientation-0.0.3/android/native_device_orientation.iml" />
+      <module fileurl="file://$USER_HOME$/development/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider-0.4.1/android/path_provider.iml" filepath="$USER_HOME$/development/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider-0.4.1/android/path_provider.iml" />
+      <module fileurl="file://$USER_HOME$/development/flutter/.pub-cache/hosted/pub.dartlang.org/share-0.5.3/android/share.iml" filepath="$USER_HOME$/development/flutter/.pub-cache/hosted/pub.dartlang.org/share-0.5.3/android/share.iml" />
+      <module fileurl="file://$USER_HOME$/development/flutter/.pub-cache/hosted/pub.dartlang.org/shared_preferences-0.4.3/android/shared_preferences.iml" filepath="$USER_HOME$/development/flutter/.pub-cache/hosted/pub.dartlang.org/shared_preferences-0.4.3/android/shared_preferences.iml" />
+      <module fileurl="file://$USER_HOME$/development/flutter/.pub-cache/hosted/pub.dartlang.org/simple_permissions-0.1.9/android/simple_permissions.iml" filepath="$USER_HOME$/development/flutter/.pub-cache/hosted/pub.dartlang.org/simple_permissions-0.1.9/android/simple_permissions.iml" />
+      <module fileurl="file://$USER_HOME$/development/flutter/.pub-cache/hosted/pub.dartlang.org/url_launcher-4.0.2/android/url_launcher.iml" filepath="$USER_HOME$/development/flutter/.pub-cache/hosted/pub.dartlang.org/url_launcher-4.0.2/android/url_launcher.iml" />
+    </modules>
+  </component>
+</project>

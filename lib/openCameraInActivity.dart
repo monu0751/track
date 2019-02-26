@@ -12,7 +12,7 @@ import 'globals.dart' as global;
 import 'package:flutter_native_image/flutter_native_image.dart';
 import 'package:exifdart/exifdart_io.dart';
 import 'package:image/image.dart' as rotatingImage;
-import 'package:flutter_image_compress/flutter_image_compress.dart';
+//import 'package:flutter_image_compress/flutter_image_compress.dart';
 
 /*import 'package:video_player/video_player.dart';*/
 

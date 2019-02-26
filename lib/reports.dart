@@ -19,6 +19,7 @@ import 'department_att.dart';
 import 'designation_att.dart';
 import 'Employeewise_att.dart';
 import  'globals.dart';
+import 'employeeTrackingReport.dart';
 
 
 class Reports extends StatefulWidget {
@@ -423,6 +424,48 @@ class _Reports extends State<Reports> {
             ),
 
             SizedBox(height: 6.0),
+            new RaisedButton(
+              child: Container(
+                padding: EdgeInsets.only(top: 5.0,bottom: 5.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Icon(Icons.perm_contact_calendar,size: 40.0,),
+                    SizedBox(width: 15.0,),
+                    Expanded(
+//                            widthFactor: MediaQuery.of(context).size.width*0.10,
+                      child:Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Container(
+                              child: Text('Employee Tracking',style: TextStyle(fontWeight:FontWeight.bold,fontSize: 20.0),)
+                          ),
+                          Container(
+                              child: Text('Track your employee',style: TextStyle(fontSize: 15.0,),)
+                          ),
+                        ],
+                      ),
+                    ),
+                    Icon(Icons.keyboard_arrow_right,size: 50.0,),
+                  ],
+                ),
+              ),
+              color: Colors.deepOrange.withOpacity(0.75),
+              elevation: 4.0,
+              splashColor: Colors.lightGreenAccent,
+              textColor: Colors.white,
+              onPressed: () {
+                if(trialstatus=="2"){
+                  showDialogWidget("Upgrade to Premium plan to check Employeewise attendance records.");
+                }else {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => TrackEmployee()),
+                  );
+                }
+              },
+            ),
+            SizedBox(height: 6.0,),
             new RaisedButton(
               child: Container(
                 padding: EdgeInsets.only(top: 5.0,bottom: 5.0),

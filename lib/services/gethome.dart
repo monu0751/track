@@ -50,6 +50,7 @@ class Home{
         prefs.setString('mail_varified', mail_varified);
         prefs.setString('profile', profile);
         prefs.setString('newpwd', newpwd);
+        print("----> Shift id---> "+timeinoutMap['shiftId']);
         prefs.setString('shiftId', timeinoutMap['shiftId']);
         prefs.setString('leavetypeid', timeinoutMap['leavetypeid']);
         prefs.setInt('Is_Delete', Is_Delete);

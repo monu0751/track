@@ -3,9 +3,7 @@
     <CLASSES>
       <root url="file://$USER_HOME$/development/flutter/.pub-cache/hosted/pub.dartlang.org/geocoder-0.1.2" />
       <root url="file://$USER_HOME$/development/flutter/.pub-cache/hosted/pub.dartlang.org/launch_review-1.0.1" />
-      <root url="file://$USER_HOME$/development/flutter/.pub-cache/hosted/pub.dartlang.org/image_picker-0.4.10" />
       <root url="file://$USER_HOME$/development/flutter/.pub-cache/hosted/pub.dartlang.org/native_device_orientation-0.0.3" />
-      <root url="file://$USER_HOME$/development/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_image_compress-0.2.2" />
       <root url="file://$USER_HOME$/development/flutter/.pub-cache/hosted/pub.dartlang.org/url_launcher-4.0.2" />
       <root url="file://$USER_HOME$/development/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider-0.4.1" />
       <root url="file://$USER_HOME$/development/flutter/.pub-cache/hosted/pub.dartlang.org/shared_preferences-0.4.3" />
@@ -16,6 +14,7 @@
       <root url="file://$USER_HOME$/development/flutter/.pub-cache/git/flutter_native_image-20947f12e6ecf58236f4b0ccaf9965f527ced46d" />
       <root url="file://$USER_HOME$/development/flutter/.pub-cache/hosted/pub.dartlang.org/location-1.4.1" />
       <root url="file://$USER_HOME$/development/flutter/.pub-cache/hosted/pub.dartlang.org/simple_permissions-0.1.9" />
+      <root url="file://$USER_HOME$/development/flutter/.pub-cache/hosted/pub.dartlang.org/image_picker-0.4.12+1" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

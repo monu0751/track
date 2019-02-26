@@ -41,6 +41,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
   StreamLocation sl = new StreamLocation();
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   /*var _defaultimage =
@@ -125,24 +126,25 @@ class _HomePageState extends State<HomePage> {
   }
 
   setLocationAddress() async {
-    setState(() {
-      streamlocationaddr = globalstreamlocationaddr;
-      if (list != null && list.length > 0) {
-        lat = list[list.length - 1]['latitude'].toString();
-        long = list[list.length - 1]["longitude"].toString();
-        if (streamlocationaddr == '') {
-          streamlocationaddr = lat + ", " + long;
+    if(this.mounted) {
+      setState(() {
+        streamlocationaddr = globalstreamlocationaddr;
+        if (list != null && list.length > 0) {
+          lat = list[list.length - 1]['latitude'].toString();
+          long = list[list.length - 1]["longitude"].toString();
+          if (streamlocationaddr == '') {
+            streamlocationaddr = lat + ", " + long;
+          }
         }
-      }
-      if(streamlocationaddr == ''){
-        sl.startStreaming(5);
-        startTimer();
-      }
-      //print("home addr" + streamlocationaddr);
-      //print(lat + ", " + long);
-
-      //print(stopstreamingstatus.toString());
-    });
+        if (streamlocationaddr == '') {
+          sl.startStreaming(5);
+          startTimer();
+        }
+        //print("home addr" + streamlocationaddr);
+        //print(lat + ", " + long);
+        //print(stopstreamingstatus.toString());
+      });
+    }
   }
 
   launchMap(String lat, String long) async {
@@ -157,6 +159,8 @@ class _HomePageState extends State<HomePage> {
   // Platform messages are asynchronous, so we initialize in an async method.
   initPlatformState() async {
 
+
+
     /*await availableCameras();*/
     final prefs = await SharedPreferences.getInstance();
     empid = prefs.getString('empid') ?? '';
@@ -166,6 +170,7 @@ class _HomePageState extends State<HomePage> {
 
 
     if (response == 1) {
+
       Loc lock = new Loc();
       location_addr = await lock.initPlatformState();
       Home ho = new Home();
@@ -213,6 +218,23 @@ class _HomePageState extends State<HomePage> {
         // //print(act1);
         streamlocationaddr = globalstreamlocationaddr;
       });
+
+    /*  if(tracking==1) {
+        try {
+          const platform = const MethodChannel('attendance.flutter.io/back_ground_services');
+          print("Tracking permission "+tracking.toString());
+          //stoping previous background service
+          *//*print("this is stop location background");
+          final int result1 = await platform.invokeMethod(
+            'stopLocationBackgroundService',{"empid":empid});*//*
+
+          //starting new background service
+          print("this is start location background");
+          final int result = await platform.invokeMethod(
+              'startLocationBackgroundService',{"empid":empid});
+        } on PlatformException catch (e) {}
+      }*/
+
     }
   }
 
@@ -1061,7 +1083,7 @@ class _HomePageState extends State<HomePage> {
       } else {
         showDialog(context: context, child:
         new AlertDialog(
-          title: new Text("!"),
+          title: new Text("Warning!"),
           content: new Text("Problem while marking attendance, try again."),
         )
         );

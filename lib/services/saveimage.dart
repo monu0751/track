@@ -39,7 +39,7 @@ class SaveImage{
     print("global Address: "+ location);
     print("global lat" + lat);
     print("global long" + long);
-    print(mk.uid+" "+location+ " "+mk.aid+" "+mk.act+" "+mk.shiftid+ " " +mk.refid+" "+lat+" "+long);
+    print("--------> this is save image - "+mk.uid+" "+location+ " "+mk.aid+" "+mk.act+" "+mk.shiftid+ " " +mk.refid+" "+lat+" "+long);
     FormData formData = new FormData.from({
     "uid": mk.uid,
     "location": location,

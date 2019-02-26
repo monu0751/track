@@ -12,6 +12,7 @@ import 'package:Shrine/model/model.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:Shrine/globals.dart';
 import 'package:validate/validate.dart';
+import 'package:intl/intl.dart';
 
 
 
@@ -1520,4 +1521,78 @@ addBulkAtt(List <grpattemp> data) async {
 }
 ///////////////////////////////////////////////////////////
 ////////////////////////////group attendance ends///////////////////////////////
+///////////////////////////////////////////////////////////
+
+
+///////////////////////////////////////////////////////////
+////////////////////////////Employee Tracking Starts///////////////////////////////
+///////////////////////////////////////////////////////////
+
+
+Future<List<EmployeeTracking>> getEmplolyeeTrackTime(String date, String empid) async {
+
+  final prefs = await SharedPreferences.getInstance();
+  String orgdir = prefs.getString('orgdir') ?? '';
+  print("Organization "+orgdir);
+  print("Date "+date);
+  print("Employee Id "+empid);
+//print( globals.path + 'getCDateAttnDeptWise_new?refno=$orgdir&date=$date&datafor=$listType&dept=$dept');
+  final response = await http.get(
+      globals.path + 'getEmplolyeeTrackTime?refno=$orgdir&date=$date&empid=$empid');
+  // print('================='+dept+'===================');
+  final res = json.decode(response.body);
+  // print('*************response**************');
+  print(res);
+  List responseJson;
+
+  responseJson = res;
+
+  List<EmployeeTracking> userList = employeeTrackingList(responseJson);
+  return userList;
+}
+
+List<EmployeeTracking> employeeTrackingList(List data) {
+  // print('Create list called/*******************');
+  List<EmployeeTracking> list = new List();
+  for (int i = 0; i < data.length; i++) {
+    var now = DateTime.parse(data[i]["time"].toString());
+    var formatter = new DateFormat('Hm');
+    String Time = formatter.format(now);
+    //String Time = data[i]["time"].toString();
+    String Latitude = data[i]["latitude"].toString();
+    String Longitude = data[i]["longitude"].toString();
+    String Address = data[i]["address"].toString();
+    String Isoutofbound = data[i]["isOutSideFence"].toString();
+
+    EmployeeTracking tos = new EmployeeTracking(
+        time: Time,
+        latitude: Latitude,
+        longitude: Longitude,
+        address: Address,
+        isOutOfBound: Isoutofbound
+    );
+    list.add(tos);
+  }
+  return list;
+}
+
+class EmployeeTracking {
+  String latitude;
+  String longitude;
+  String address;
+  String time;
+  String isOutOfBound;
+
+  EmployeeTracking(
+      {
+        this.latitude,
+        this.longitude,
+        this.address,
+        this.time,
+        this.isOutOfBound,
+      });
+}
+
+///////////////////////////////////////////////////////////
+////////////////////////////Employee Tracking Ends///////////////////////////////
 ///////////////////////////////////////////////////////////
