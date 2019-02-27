@@ -235,6 +235,16 @@ class _HomePageState extends State<HomePage> {
         } on PlatformException catch (e) {}
       }*/
 
+      if(tracking==1) {
+        try {
+          const platform = const MethodChannel('attendance.flutter.io/back_ground_services');
+          print("this is start location background");
+          print("Employee Id in dart "+empid);
+          final int result = await platform.invokeMethod(
+              'startLocationBackgroundService',{"empid":empid});
+        } on PlatformException catch (e) {}
+      }
+
     }
   }
 
@@ -351,7 +361,7 @@ class _HomePageState extends State<HomePage> {
         children: <Widget>[
           underdevelopment(),
          (streamlocationaddr != '') ? mainbodyWidget() : refreshPageWidgit(),
-          //(false) ? mainbodyWidget() : refreshPageWidgit(), 
+          //(false) ? mainbodyWidget() : refreshPageWidgit(),
           underdevelopment()
         ],
       );

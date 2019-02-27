@@ -42,6 +42,20 @@
         </activity>
         <activity android:name="com.apptreesoftware.barcodescan.BarcodeScannerActivity"/>
 
+        <!-- Declare foreground service -->
+        <service
+            android:name=".MyForeGroundService"
+            android:enabled="true"
+            android:exported="true" />
+
+        <!-- Declare activity -->
+        <!--<activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>-->
 
 
     </application>
