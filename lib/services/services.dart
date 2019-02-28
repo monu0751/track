@@ -1536,13 +1536,14 @@ Future<List<EmployeeTracking>> getEmplolyeeTrackTime(String date, String empid) 
   print("Organization "+orgdir);
   print("Date "+date);
   print("Employee Id "+empid);
-//print( globals.path + 'getCDateAttnDeptWise_new?refno=$orgdir&date=$date&datafor=$listType&dept=$dept');
+  print(globals.path + 'getEmplolyeeTrackTime?refno=$orgdir&date=$date&empid=$empid');
   final response = await http.get(
       globals.path + 'getEmplolyeeTrackTime?refno=$orgdir&date=$date&empid=$empid');
-  // print('================='+dept+'===================');
+   print('===================================');
+   print(response.body);
   final res = json.decode(response.body);
   // print('*************response**************');
-  print(res);
+  print("----------------------->"+res.toString());
   List responseJson;
 
   responseJson = res;
@@ -1552,7 +1553,7 @@ Future<List<EmployeeTracking>> getEmplolyeeTrackTime(String date, String empid) 
 }
 
 List<EmployeeTracking> employeeTrackingList(List data) {
-  // print('Create list called/*******************');
+   print('Create list called/*******************');
   List<EmployeeTracking> list = new List();
   for (int i = 0; i < data.length; i++) {
     var now = DateTime.parse(data[i]["time"].toString());
@@ -1571,6 +1572,7 @@ List<EmployeeTracking> employeeTrackingList(List data) {
         address: Address,
         isOutOfBound: Isoutofbound
     );
+
     list.add(tos);
   }
   return list;

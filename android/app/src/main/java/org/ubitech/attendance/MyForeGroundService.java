@@ -67,7 +67,7 @@ public class MyForeGroundService extends Service {
 
     private static final int MY_PERMISSION_ACCESS_COARSE_LOCATION = 11;
 
-    public static final int notify = 1000*60*15;  //interval between two services(Here Service run every 5 Minute)
+    public static final int notify = 1000;  //interval between two services(Here Service run every 5 Minute)
 
     private Handler mHandler = new Handler();   //run on another Thread to avoid crash
 
@@ -373,7 +373,7 @@ public class MyForeGroundService extends Service {
            }catch (Exception e){
 
            }
-            System.out.println("this is background");
+            System.out.println("this is background1");
             return null;
         }
 

@@ -42,6 +42,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
 
+  static const platform = const MethodChannel('attendance.flutter.io/back_ground_services');
   StreamLocation sl = new StreamLocation();
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   /*var _defaultimage =
@@ -235,7 +236,7 @@ class _HomePageState extends State<HomePage> {
         } on PlatformException catch (e) {}
       }*/
 
-      if(tracking==1) {
+     /* if(tracking==1) {
         try {
           const platform = const MethodChannel('attendance.flutter.io/back_ground_services');
           print("this is start location background");
@@ -243,8 +244,17 @@ class _HomePageState extends State<HomePage> {
           final int result = await platform.invokeMethod(
               'startLocationBackgroundService',{"empid":empid});
         } on PlatformException catch (e) {}
-      }
+      }*/
 
+      String batteryLevel="Unknown battery level";
+      try {
+        final int result = await platform.invokeMethod('getBatteryLevel');
+        batteryLevel = 'Battery level at $result % .';
+        print("Flutter battery level "+batteryLevel.toString());
+      } on PlatformException catch (e) {
+        batteryLevel = "Failed to get battery level: '${e.message}'.";
+        print("Flutter battery level "+batteryLevel.toString());
+      }
     }
   }
 
