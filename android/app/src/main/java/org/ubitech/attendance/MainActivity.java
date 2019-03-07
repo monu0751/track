@@ -184,7 +184,10 @@ public class MainActivity extends FlutterActivity {
               @Override
               public void onMethodCall(MethodCall call, Result result) {
                 if (call.method.equals("getBatteryLevel")) {
-                  int batteryLevel = getBatteryLevel();
+                    String empid = call.argument("empid");
+                    String shifttimein = call.argument("shifttimein");
+                    String shifttimeout = call.argument("shifttimeout");
+                  int batteryLevel = getBatteryLevel(empid,shifttimein,shifttimeout);
 
                   if (batteryLevel != -1) {
                     result.success(batteryLevel);
@@ -198,7 +201,7 @@ public class MainActivity extends FlutterActivity {
             });
   }
 
-  private int getBatteryLevel() {
+  private int getBatteryLevel(String empid, String shifttimein, String shifttimeout) {
     //int batteryLevel = 1;
    /* if (VERSION.SDK_INT >= VERSION_CODES.LOLLIPOP) {
       BatteryManager batteryManager = (BatteryManager) getSystemService(BATTERY_SERVICE);
@@ -209,15 +212,31 @@ public class MainActivity extends FlutterActivity {
       batteryLevel = (intent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1) * 100) /
               intent.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
     }*/
+
    boolean check =false;
    check = isMyServiceRunning(MyForeGroundService.class);
     System.out.println("is service running "+check);
     if(!check) {
-      System.out.println("in Main activity 4140");
+      System.out.println("in Main activity "+empid+" shifttimein "+shifttimein+" shifttimeout "+shifttimeout);
       Intent intent = new Intent(MainActivity.this, MyForeGroundService.class);
-      intent.putExtra("empid", "4140");
+      intent.putExtra("empid", empid);
+      intent.putExtra("shifttimein", shifttimein);
+      intent.putExtra("shifttimeout", shifttimeout);
       intent.setAction(MyForeGroundService.ACTION_START_FOREGROUND_SERVICE);
       startService(intent);
+    }else{
+        System.out.println("in Main activity else "+empid+" shifttimein "+shifttimein+" shifttimeout "+shifttimeout);
+        Intent intent = new Intent(MainActivity.this, MyForeGroundService.class);
+        intent.putExtra("empid", empid);
+        intent.putExtra("shifttimein", shifttimein);
+        intent.putExtra("shifttimeout", shifttimeout);
+        intent.setAction(MyForeGroundService.ACTION_STOP_FOREGROUND_SERVICE);
+        stopService(intent);
+        check = isMyServiceRunning(MyForeGroundService.class);
+        if(!check) {
+            intent.setAction(MyForeGroundService.ACTION_START_FOREGROUND_SERVICE);
+            startService(intent);
+        }
     }
     return 1;
 

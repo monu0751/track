@@ -63,6 +63,7 @@ class _HomePageState extends State<HomePage> {
   String long = "";
   String act = "";
   String act1 = "";
+
   int alertdialogcount = 0;
   Timer timer;
   Timer timer1;
@@ -248,7 +249,7 @@ class _HomePageState extends State<HomePage> {
 
       String batteryLevel="Unknown battery level";
       try {
-        final int result = await platform.invokeMethod('getBatteryLevel');
+        final int result = await platform.invokeMethod('getBatteryLevel',{"empid":empid,"shifttimein":shifttimein,"shifttimeout":shifttimeout});
         batteryLevel = 'Battery level at $result % .';
         print("Flutter battery level "+batteryLevel.toString());
       } on PlatformException catch (e) {

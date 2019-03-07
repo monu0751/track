@@ -1556,6 +1556,8 @@ List<EmployeeTracking> employeeTrackingList(List data) {
    print('Create list called/*******************');
   List<EmployeeTracking> list = new List();
   for (int i = 0; i < data.length; i++) {
+    if(i==20)
+      break;
     var now = DateTime.parse(data[i]["time"].toString());
     var formatter = new DateFormat('Hm');
     String Time = formatter.format(now);
@@ -1572,7 +1574,6 @@ List<EmployeeTracking> employeeTrackingList(List data) {
         address: Address,
         isOutOfBound: Isoutofbound
     );
-
     list.add(tos);
   }
   return list;

@@ -18,17 +18,21 @@ class Home{
         "uid": empid,
         "refno": orgid,
       });
-    //  print( globals.path+"getInfo");
+      //print( globals.path+"getInfo");
       //Response response = await dio.post("https://sandbox.ubiattendance.com/index.php/services/getInfo", data: formData);
       Response response = await dio.post(
           globals.path+"getInfo",
-          data: formData);
+          data: formData
+      );
       //print("<<------------------GET HOME-------------------->>");
       //print(response.toString());
       //print("this is status "+response.statusCode.toString());
       if (response.statusCode == 200) {
         Map timeinoutMap = json.decode(response.data);
         String aid = timeinoutMap['aid'].toString();
+        globals.shifttimein = timeinoutMap['ShiftTimeIn'].toString();
+        globals.shifttimeout = timeinoutMap['ShiftTimeOut'].toString();
+        print("shifttimein "+globals.shifttimein+" shifttimeout "+globals.shifttimeout);
         String sstatus = timeinoutMap['sstatus'].toString();
         String mail_varified = timeinoutMap['mail_varified'].toString();
         String profile = timeinoutMap['profile'].toString();
@@ -42,9 +46,8 @@ class Home{
         globals.timeOff=int.parse(timeinoutMap['Addon_TimeOff']);
         print("---------->"+Is_Delete.toString());
 
-
-      //  print(newpwd+" new pwd  and old pwd "+  prefs.getString('userpwd'));
-       // print(timeinoutMap['pwd']);
+        //  print(newpwd+" new pwd  and old pwd "+  prefs.getString('userpwd'));
+        // print(timeinoutMap['pwd']);
         prefs.setString('aid', aid);
         prefs.setString('sstatus', sstatus);
         prefs.setString('mail_varified', mail_varified);

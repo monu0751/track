@@ -34,7 +34,10 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 import java.util.Timer;
@@ -63,11 +66,11 @@ public class MyForeGroundService extends Service {
 
     public static final String MY_PREFS_NAME = "MyPrefsFile";
 
-    public String empid;
+    public String empid,shifttimein,shifttimeout;
 
     private static final int MY_PERMISSION_ACCESS_COARSE_LOCATION = 11;
 
-    public static final int notify = 1000;  //interval between two services(Here Service run every 5 Minute)
+    public static final int notify = 1000*60*5;  //interval between two services(Here Service run every 5 Minute)
 
     private Handler mHandler = new Handler();   //run on another Thread to avoid crash
 
@@ -90,6 +93,20 @@ public class MyForeGroundService extends Service {
     private static final int LOCATION_INTERVAL = 1000;
 
     private static final float LOCATION_DISTANCE = 10f;
+
+    public static final String inputFormat = "HH:mm:ss";
+
+    private Date date;
+
+    private Date dateCompareOne;
+
+    private Date dateCompareTwo;
+
+    private String compareStringOne = "9:45";
+
+    private String compareStringTwo = "1:45";
+
+    SimpleDateFormat inputParser = new SimpleDateFormat(inputFormat);
 
     public MyForeGroundService() {
     }
@@ -149,9 +166,13 @@ public class MyForeGroundService extends Service {
 
         Bundle extras = intent.getExtras();
         empid = (String)extras.get("empid");
+        shifttimein = (String)extras.get("shifttimein");
+        shifttimeout = (String)extras.get("shifttimeout");
 
         SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
         editor.putString("empid", empid);
+        editor.putString("shifttimein", shifttimein);
+        editor.putString("shifttimeout", shifttimeout);
         editor.apply();
 
 
@@ -199,8 +220,8 @@ public class MyForeGroundService extends Service {
 
         // Make notification show big text.
         NotificationCompat.BigTextStyle bigTextStyle = new NotificationCompat.BigTextStyle();
-        bigTextStyle.setBigContentTitle("Music player implemented by foreground service.");
-        bigTextStyle.bigText("Android foreground service is a android service which can run in foreground always, it can be controlled by user via notification.");
+        bigTextStyle.setBigContentTitle("UbiAttendance is running in background.");
+        //bigTextStyle.bigText("Android foreground service is a android service which can run in foreground always, it can be controlled by user via notification.");
         // Set big text style.
         builder.setStyle(bigTextStyle);
 
@@ -213,7 +234,7 @@ public class MyForeGroundService extends Service {
         // Make head-up notification.
         builder.setFullScreenIntent(pendingIntent, true);
 
-        // Add Play button intent in notification.
+      /*  // Add Play button intent in notification.
         Intent playIntent = new Intent(this, MyForeGroundService.class);
         playIntent.setAction(ACTION_PLAY);
         PendingIntent pendingPlayIntent = PendingIntent.getService(this, 0, playIntent, 0);
@@ -225,7 +246,7 @@ public class MyForeGroundService extends Service {
         pauseIntent.setAction(ACTION_PAUSE);
         PendingIntent pendingPrevIntent = PendingIntent.getService(this, 0, pauseIntent, 0);
         NotificationCompat.Action prevAction = new NotificationCompat.Action(android.R.drawable.ic_media_pause, "Pause", pendingPrevIntent);
-        builder.addAction(prevAction);
+        builder.addAction(prevAction);*/
 
         // Build the notification.
         Notification notification = builder.build();
@@ -387,6 +408,16 @@ public class MyForeGroundService extends Service {
     }
 
 
+    private Date parseDate(String date) {
+
+        try {
+            return inputParser.parse(date);
+        } catch (java.text.ParseException e) {
+            return new Date(0);
+        }
+    }
+
+
     public void sendCoordinates(String lati, String longi, String add){
         try {
             /*empid = prefs.getString("empid", "");*/
@@ -395,27 +426,54 @@ public class MyForeGroundService extends Service {
             //empid = prefs.getString("empid", "");
             SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
             empid = prefs.getString("empid", "");
-
-            System.out.println("in Send Coordinates "+ empid);
+            shifttimein = prefs.getString("shifttimein", "");
+            shifttimeout = prefs.getString("shifttimeout", "");
+            compareStringOne = shifttimein;
+            compareStringTwo = shifttimeout;
+            System.out.println("in Send Coordinates "+ empid+" shifttimein "+shifttimein+" shifttimeout "+ shifttimeout);
 
             System.out.println("This is web api called");
 
+            Calendar now = Calendar.getInstance();
+
+            int hour = now.get(Calendar.HOUR_OF_DAY);
+            int minute = now.get(Calendar.MINUTE);
+            int seconds = now.get(Calendar.SECOND);
+
+            date = parseDate(hour + ":" + minute + ":" +seconds);
+            dateCompareOne = parseDate(compareStringOne);
+            dateCompareTwo = parseDate(compareStringTwo);
+            System.out.println("dateCompareOne "+dateCompareOne);
+            System.out.println("dateCompareTwo "+dateCompareTwo);
+            System.out.println("Date "+date);
+
+           // if ( dateCompareOne.before( date ) && dateCompareTwo.after(date)) {
+                //yada yada
+                URL url = new URL("https://sandbox.ubiattendance.com/index.php/Att_services/backgroundLocationService?"+"latitude="+lati+"&longitude="+longi+"&address="+add+"&empid="+empid);
+                //URL url = new URL("http://192.168.0.200/ubiattendance/index.php/Att_services/backgroundLocationService?"+"latitude="+lati+"&longitude="+longi+"&address="+add+"&empid="+empid);
+
+                HttpURLConnection httpConn = (HttpURLConnection)url.openConnection();
+
+                httpConn.setRequestMethod("GET");
+
+                InputStream inputStream = httpConn.getInputStream();
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                String line = bufferedReader.readLine();
+
+                httpConn.disconnect();
+
+                //System.out.println("inside if");
+
+            /*}else{
+                System.out.println("inside else");
+                stopForegroundService();
+           }*/
 
             //URL url = new URL("http://192.168.0.200/ubiattendance/index.php/Att_services/backgroundLocationService?"+"latitude="+lati+"&longitude="+longi+"&address="+add+"&empid="+empid);
-            URL url = new URL("https://sandbox.ubiattendance.com/index.php/Att_services/backgroundLocationService?"+"latitude="+lati+"&longitude="+longi+"&address="+add+"&empid="+empid);
 
-            HttpURLConnection httpConn = (HttpURLConnection)url.openConnection();
 
-            httpConn.setRequestMethod("GET");
-
-            InputStream inputStream = httpConn.getInputStream();
-            InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-            String line = bufferedReader.readLine();
-
-            httpConn.disconnect();
-
-/*            HttpClient httpclient = new DefaultHttpClient();
+            /*HttpClient httpclient = new DefaultHttpClient();
             HttpPost post = new HttpPost("http://192.168.0.200/ubiattendance/index.php/Att_services/backgroundLocationService");
             //HttpPost post = new HttpPost("https://sandbox.ubiattendance.com/index.php/Att_services/backgroundLocationService");
             List<NameValuePair> list=new ArrayList<NameValuePair>();
@@ -457,7 +515,7 @@ public class MyForeGroundService extends Service {
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID);
         Notification notification = notificationBuilder.setOngoing(true)
                 .setSmallIcon(R.drawable.common_google_signin_btn_icon_dark)
-                .setContentTitle("App is running in background")
+                .setContentTitle("UbiAttendance is running in background")
                 .setPriority(NotificationManager.IMPORTANCE_MIN)
                 .setCategory(Notification.CATEGORY_SERVICE)
                 .build();
